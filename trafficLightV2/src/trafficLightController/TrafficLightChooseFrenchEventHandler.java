@@ -63,6 +63,7 @@ public class TrafficLightChooseFrenchEventHandler implements ActionListener
 		this.tl.getCycleContext().setCycleStrategy(new TrafficLightFrenchModel());
 		// resetting the traffic light
 		this.tl.getCycleContext().getCycleStrategy().reset();
+		this.gui.update(this.tl.getTrafficLightInstruction(), this.tl.getDisplayColor());
 	}
 
 }
