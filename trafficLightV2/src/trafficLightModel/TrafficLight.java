@@ -6,17 +6,18 @@ public class TrafficLight {
 	
 	// attributes
 	private boolean isRunning;	// whether the traffic light is running or not
-	private TrafficLightColor color;	// current color
+	private TrafficLightCycleContext cycleContext;	// context containing a appropriate cycle implementation
 	
 	
 	///////////////////////////////////////////////////////////////////////////
 	
 	
 	// constructor
-	public TrafficLight()
+	public TrafficLight(TrafficLightColorCycle trafficLightType)
 	{
 		this.isRunning = false;	// turned off by default
-		this.color = TrafficLightColor.GREY;
+		// creating a new cycle context using the given traffic light type
+		this.cycleContext = new TrafficLightCycleContext(trafficLightType);
 	}
 	
 	
@@ -30,9 +31,9 @@ public class TrafficLight {
 	}
 	
 	
-	public TrafficLightColor getColor()
+	public TrafficLightCycleContext getCycleContext()
 	{
-		return this.color;
+		return this.cycleContext;
 	}
 	
 	
@@ -42,9 +43,9 @@ public class TrafficLight {
 	}
 	
 	
-	public void setColor(TrafficLightColor color)
+	public void setCycleContext(TrafficLightCycleContext cycleContext)
 	{
-		this.color = color;
+		this.cycleContext = cycleContext;
 	}
 	
 	
@@ -57,30 +58,21 @@ public class TrafficLight {
 		if (this.isRunning)
 		{
 			this.isRunning = false;
-			this.color = TrafficLightColor.GREY;	// reset
 		}
 		else
 		{
 			this.isRunning = true;
-			this.color = TrafficLightColor.RED;	// red by default when turning on the traffic light
 		}
 	}
 	
 	
-	// moves one step forward in the traffic light cycle
-	// using the 3-steps French cycle (G -> O -> R -> G...)
+	// moves one step forward in the traffic light cycle using the strategy provided in the context
 	public void advanceCycle()
 	{
 		// only changing color if the traffic light is running
 		if (this.isRunning)
 		{
-			switch (this.color)
-			{
-			case GREEN: this.color = TrafficLightColor.ORANGE; break;
-			case ORANGE: this.color = TrafficLightColor.RED; break;
-			case RED: this.color = TrafficLightColor.GREEN; break;
-			case GREY: break;	// not possible
-			}
+			this.cycleContext.advanceCycle();
 		}
 	}
 	
@@ -90,10 +82,11 @@ public class TrafficLight {
 	public String getTrafficLightInstruction()
 	{
 		String instruction = "default instruction";
+		TrafficLightColor color = this.cycleContext.getCycleStrategy().getCurrentColor();
 		
 		if (this.isRunning)
 		{
-			switch (this.color)
+			switch (color)
 			{
 			case GREEN: instruction = "You can go !"; break;
 			case ORANGE: instruction = "Warning !"; break;
@@ -114,8 +107,9 @@ public class TrafficLight {
 	public Color getDisplayColor()
 	{
 		Color color = Color.gray;
+		TrafficLightColor currentColor = this.cycleContext.getCycleStrategy().getCurrentColor();
 		
-		switch (this.color)
+		switch (currentColor)
 		{
 		case GREEN: color = Color.green; break;
 		case ORANGE: color = Color.orange; break;
@@ -132,7 +126,9 @@ public class TrafficLight {
 	{
 		String infos = "";
 		infos = infos + "Traffic light state : " + this.isRunning + ", color : ";
-		switch (this.color)
+		TrafficLightColor currentColor = this.cycleContext.getCycleStrategy().getCurrentColor();
+		
+		switch (currentColor)
 		{
 		case GREEN: infos = infos + "Green"; break;
 		case ORANGE: infos = infos + "Orange"; break;
