@@ -12,9 +12,12 @@ public class TrafficLightGraphicalView extends JInternalFrame
 {
 	
 	// attributes
+	private static int uniqueIdGenerator = 1;
+	
 	private JButton buttonOnOff;
 	private JButton buttonAdvanceCycle;
 	private JLabel labelTrafficLightColor;
+	private int id;
 	
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -23,7 +26,10 @@ public class TrafficLightGraphicalView extends JInternalFrame
 	// constructor
 	public TrafficLightGraphicalView()
 	{
-		this.setTitle("Traffic light (graphical view)");
+		// generating GUI ID
+		this.id = TrafficLightGraphicalView.uniqueIdGenerator++;
+		
+		this.setTitle("Traffic light - graphical view #" + this.id);
 		this.setSize(250,100);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
@@ -69,6 +75,12 @@ public class TrafficLightGraphicalView extends JInternalFrame
 	}
 	
 	
+	public int getId()
+	{
+		return this.id;
+	}
+	
+	
 	public void setButtonOnOff(JButton buttonOnOff)
 	{
 		this.buttonOnOff = buttonOnOff;
@@ -84,6 +96,12 @@ public class TrafficLightGraphicalView extends JInternalFrame
 	public void setLabelTrafficLightColor(JLabel trafficLightColor)
 	{
 		this.labelTrafficLightColor = trafficLightColor;
+	}
+	
+	
+	public void setId(int id)
+	{
+		this.id = id;
 	}
 	
 	

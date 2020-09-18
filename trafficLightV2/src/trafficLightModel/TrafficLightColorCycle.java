@@ -6,6 +6,9 @@ public interface TrafficLightColorCycle
 	// takes the current traffic light's color and returns the new one
 	public void advanceCycle();
 	
-	// to get the color
+	public void turnOnOff();
+	
+	// to get the color & the state
 	public TrafficLightColor getCurrentColor();
+	public boolean getIsRunning();
 }

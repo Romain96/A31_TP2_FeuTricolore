@@ -5,7 +5,6 @@ import java.awt.Color;
 public class TrafficLight {
 	
 	// attributes
-	private boolean isRunning;	// whether the traffic light is running or not
 	private TrafficLightCycleContext cycleContext;	// context containing a appropriate cycle implementation
 	
 	
@@ -15,7 +14,6 @@ public class TrafficLight {
 	// constructor
 	public TrafficLight(TrafficLightColorCycle trafficLightType)
 	{
-		this.isRunning = false;	// turned off by default
 		// creating a new cycle context using the given traffic light type
 		this.cycleContext = new TrafficLightCycleContext(trafficLightType);
 	}
@@ -24,22 +22,10 @@ public class TrafficLight {
 	///////////////////////////////////////////////////////////////////////////
 	
 	
-	// getters/setters
-	public boolean getIsRunning()
-	{
-		return this.isRunning;
-	}
-	
-	
+	// getters/setters	
 	public TrafficLightCycleContext getCycleContext()
 	{
 		return this.cycleContext;
-	}
-	
-	
-	public void setRunning(boolean isRunning)
-	{
-		this.isRunning = isRunning;
 	}
 	
 	
@@ -55,25 +41,14 @@ public class TrafficLight {
 	// turn on/off the traffic light
 	public void turnOnOff()
 	{
-		if (this.isRunning)
-		{
-			this.isRunning = false;
-		}
-		else
-		{
-			this.isRunning = true;
-		}
+		this.cycleContext.getCycleStrategy().turnOnOff();
 	}
 	
 	
 	// moves one step forward in the traffic light cycle using the strategy provided in the context
 	public void advanceCycle()
 	{
-		// only changing color if the traffic light is running
-		if (this.isRunning)
-		{
-			this.cycleContext.advanceCycle();
-		}
+		this.cycleContext.advanceCycle();
 	}
 	
 	
@@ -84,7 +59,7 @@ public class TrafficLight {
 		String instruction = "default instruction";
 		TrafficLightColor color = this.cycleContext.getCycleStrategy().getCurrentColor();
 		
-		if (this.isRunning)
+		if (this.cycleContext.getCycleStrategy().getIsRunning())
 		{
 			switch (color)
 			{
@@ -125,7 +100,7 @@ public class TrafficLight {
 	public String toString()
 	{
 		String infos = "";
-		infos = infos + "Traffic light state : " + this.isRunning + ", color : ";
+		infos = infos + "Traffic light state : " + this.cycleContext.getCycleStrategy().getIsRunning() + ", color : ";
 		TrafficLightColor currentColor = this.cycleContext.getCycleStrategy().getCurrentColor();
 		
 		switch (currentColor)

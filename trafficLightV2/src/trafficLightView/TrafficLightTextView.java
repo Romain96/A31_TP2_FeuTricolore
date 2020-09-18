@@ -12,9 +12,12 @@ public class TrafficLightTextView extends JInternalFrame
 {
 	
 	// attributes
+	private static int uniqueIdGenerator = 1;
+	
 	private JButton buttonOnOff;
 	private JButton buttonAdvanceCycle;
 	private JLabel labelTrafficLightInstruction;
+	private int id;
 	
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -23,7 +26,10 @@ public class TrafficLightTextView extends JInternalFrame
 	// constructor
 	public TrafficLightTextView()
 	{
-		this.setTitle("Traffic light (text view)");
+		// generating GUI ID
+		this.id = TrafficLightTextView.uniqueIdGenerator++;
+		
+		this.setTitle("Traffic light - text view #" + this.id);
 		this.setSize(250,100);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
@@ -65,6 +71,12 @@ public class TrafficLightTextView extends JInternalFrame
 	{
 		return this.labelTrafficLightInstruction;
 	}
+	
+	
+	public int getId()
+	{
+		return this.id;
+	}
 		
 		
 	public void setButtonOnOff(JButton buttonOnOff)
@@ -85,7 +97,14 @@ public class TrafficLightTextView extends JInternalFrame
 	}
 	
 	
+	private void setId(int id)
+	{
+		this.id = id;
+	}
+	
+	
 	///////////////////////////////////////////////////////////////////////////
+	
 	
 	// updates the displayed instruction
 	public void update(String instruction)

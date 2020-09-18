@@ -6,6 +6,7 @@ public class TrafficLightGermanModel implements TrafficLightColorCycle
 	// attributes
 	private TrafficLightColor currentColor;
 	private TrafficLightColor nextColor;
+	private boolean isRunning;
 	
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -14,56 +15,89 @@ public class TrafficLightGermanModel implements TrafficLightColorCycle
 	// constructor
 	public TrafficLightGermanModel()
 	{
-		this.currentColor = TrafficLightColor.RED;
-		this.nextColor = TrafficLightColor.ORANGE;
+		this.currentColor = TrafficLightColor.GREY;
+		this.nextColor = TrafficLightColor.RED;
+		this.isRunning = false;
 	}
 	
 	
 	///////////////////////////////////////////////////////////////////////////
 	
 	
-	// assuming this method only gets called when the traffic light is running
-	// it modifies its attribute.
 	// Note: German 4-steps : GREEN -> ORANGE -> RED -> ORANGE --> GREEN...
 	public void advanceCycle() 
 	{
-		switch (this.currentColor)
+		if (this.isRunning)
 		{
-		case GREEN: 
-			this.currentColor = TrafficLightColor.ORANGE;
-			this.nextColor = TrafficLightColor.RED;
-			break;
-		
-		case ORANGE:
+			switch (this.currentColor)
+			{
+			case GREEN: 
+				this.currentColor = TrafficLightColor.ORANGE;
+				this.nextColor = TrafficLightColor.RED;
+				break;
 			
-			if (this.nextColor == TrafficLightColor.GREEN)
-			{
-				this.currentColor = TrafficLightColor.GREEN;
-				this.nextColor = TrafficLightColor.ORANGE;
+			case ORANGE:
+				
+				if (this.nextColor == TrafficLightColor.GREEN)
+				{
+					this.currentColor = TrafficLightColor.GREEN;
+					this.nextColor = TrafficLightColor.ORANGE;
+				}
+				else if (this.nextColor == TrafficLightColor.RED)
+				{
+					this.currentColor = TrafficLightColor.RED;
+					this.nextColor = TrafficLightColor.ORANGE;
+				}
+				break;
+			
+			case RED:
+				this.currentColor = TrafficLightColor.ORANGE;
+				this.nextColor = TrafficLightColor.GREEN;
+				break;
+			
+			case GREY:
+				this.currentColor = TrafficLightColor.GREY;
+				this.nextColor = TrafficLightColor.GREY;
+				break;
 			}
-			else if (this.nextColor == TrafficLightColor.RED)
-			{
-				this.currentColor = TrafficLightColor.RED;
-				this.nextColor = TrafficLightColor.ORANGE;
-			}
-			break;
-		
-		case RED:
-			this.currentColor = TrafficLightColor.ORANGE;
-			this.nextColor = TrafficLightColor.GREEN;
-			break;
-		
-		case GREY:
+		}
+		else
+		{
 			this.currentColor = TrafficLightColor.GREY;
-			this.nextColor = TrafficLightColor.GREY;
-			break;
+			this.nextColor = TrafficLightColor.RED;
 		}
 	}
 	
 	
+	
+	public void turnOnOff()
+	{
+		if (this.isRunning)
+		{
+			this.isRunning = false;
+			this.currentColor = TrafficLightColor.GREY;
+		}
+		else
+		{
+			this.isRunning = true;
+			this.currentColor = TrafficLightColor.RED;
+		}
+	}
+	
+	
+	///////////////////////////////////////////////////////////////////////////
+	
+	
+	// getters
 	public TrafficLightColor getCurrentColor()
 	{
 		return this.currentColor;
+	}
+	
+	
+	public boolean getIsRunning()
+	{
+		return this.isRunning;
 	}
 
 }
