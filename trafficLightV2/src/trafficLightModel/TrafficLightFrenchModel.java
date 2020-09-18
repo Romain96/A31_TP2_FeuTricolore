@@ -68,6 +68,14 @@ public class TrafficLightFrenchModel implements TrafficLightColorCycle
 	}
 	
 	
+	
+	public void reset()
+	{
+		this.currentColor = TrafficLightColor.GREY;
+		this.isRunning = false;
+	}
+	
+	
 	///////////////////////////////////////////////////////////////////////////
 
 	

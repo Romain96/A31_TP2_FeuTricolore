@@ -14,5 +14,7 @@ public class Main {
 		// adding the traffic light instance to all event handlers of the main window
 		mv.getEventHandlerOnOff().setTrafficLight(tl);
 		mv.getEventHandlerAdvanceCycle().setTrafficLight(tl);
+		mv.getEventHandlerChooseFrench().setTrafficLight(tl);
+		mv.getEventHandlerChooseGerman().setTrafficLight(tl);
 	}
 }

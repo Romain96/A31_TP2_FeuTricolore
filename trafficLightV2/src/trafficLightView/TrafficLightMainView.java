@@ -15,22 +15,35 @@ import javax.swing.KeyStroke;
 import trafficLightController.TrafficLightAddGraphicalEventHandler;
 import trafficLightController.TrafficLightAddTextEventHandler;
 import trafficLightController.TrafficLightAdvanceCycleEventHandler;
+import trafficLightController.TrafficLightChooseFrenchEventHandler;
+import trafficLightController.TrafficLightChooseGermanEventHandler;
 import trafficLightController.TrafficLightOnOffEventHandler;
 
 public class TrafficLightMainView extends JFrame
 {
 	
 	//attributes
-	private ArrayList<TrafficLightGraphicalView> graphicalViews;
-	private ArrayList<TrafficLightTextView> textViews;
+	private ArrayList<TrafficLightGraphicalView> graphicalViews;	// all graphical views
+	private ArrayList<TrafficLightTextView> textViews;				// all text views
 	
 	private JMenuBar menuBar;
 	private JMenu menu;
-	private JMenuItem menuItemAddGraphical;
-	private JMenuItem menuItemAddText;
+	
+	private JMenu submenuChangeTrafficLight;	// switch traffic light type (French/German)
+	private JMenu submenuAddView;				// add new views (graphical/text)
+	private JMenu submenuRemoveView;			// remove views (graphical/text)
+	
+	private JMenuItem menuItemChooseFrench;		// choosing a French traffic light - submenuChangeTrafficLight
+	private JMenuItem menuItemChooseGerman;		// choosing a German traffic light - submenuChangeTrafficLight
+	
+	private JMenuItem menuItemAddGraphical;		// adding a new graphical view - submenuAddView
+	private JMenuItem menuItemAddText;			// adding a new text view - submenuAddView
 	
 	private TrafficLightOnOffEventHandler eventHandlerOnOff;
 	private TrafficLightAdvanceCycleEventHandler eventHandlerAdvanceCycle;
+	
+	private TrafficLightChooseFrenchEventHandler eventHandlerChooseFrench;
+	private TrafficLightChooseGermanEventHandler eventHandlerChooseGerman;
 	
 	private TrafficLightAddGraphicalEventHandler eventHandlerAddGraphical;
 	private TrafficLightAddTextEventHandler eventHandlerAddText;
@@ -85,20 +98,50 @@ public class TrafficLightMainView extends JFrame
 		this.menu.setMnemonic(KeyEvent.VK_A);
 		this.menu.getAccessibleContext().setAccessibleDescription("Opening program options");
 		this.menuBar.add(this.menu);
+		
+		// creating a sub menu dedicated to traffic light cycle choice
+		this.submenuChangeTrafficLight  = new JMenu("Choose traffic light");
+		this.submenuChangeTrafficLight.setMnemonic(KeyEvent.VK_A);
+		this.submenuChangeTrafficLight.getAccessibleContext().setAccessibleDescription("Choose a traffic light type");
+		this.menu.add(this.submenuChangeTrafficLight);
+		
+		// choosing a French traffic light
+		this.menuItemChooseFrench = new JMenuItem("French 3-steps", KeyEvent.VK_T);
+		this.menuItemChooseFrench.getAccessibleContext().setAccessibleDescription("This changes the traffic light to a French model");
+		this.submenuChangeTrafficLight.add(this.menuItemChooseFrench);
+		this.eventHandlerChooseFrench = new TrafficLightChooseFrenchEventHandler(this);
+		this.menuItemChooseFrench.addActionListener(this.eventHandlerChooseFrench);
+		
+		// choosing a German traffic light
+		this.menuItemChooseGerman = new JMenuItem("German 4-steps", KeyEvent.VK_T);
+		this.menuItemChooseGerman.getAccessibleContext().setAccessibleDescription("This changes the traffic light to a German model");
+		this.submenuChangeTrafficLight.add(this.menuItemChooseGerman);
+		this.eventHandlerChooseGerman = new TrafficLightChooseGermanEventHandler(this);
+		this.menuItemChooseGerman.addActionListener(this.eventHandlerChooseGerman);
 				
+		// creating a sub menu dedicated to view addition
+		this.submenuAddView = new JMenu("Adding windows");
+		this.submenuAddView.setMnemonic(KeyEvent.VK_A);
+		this.submenuAddView.getAccessibleContext().setAccessibleDescription("Adding graphical or text windows");
+		this.menu.addSeparator();
+		this.menu.add(this.submenuAddView);
+		
 		// adding a new graphical window
 		this.menuItemAddGraphical = new JMenuItem("Add a new graphical window", KeyEvent.VK_T);
 		this.menuItemAddGraphical.getAccessibleContext().setAccessibleDescription("This adds a new graphical window");
-		this.menu.add(this.menuItemAddGraphical);
+		this.submenuAddView.add(this.menuItemAddGraphical);
 		this.eventHandlerAddGraphical = new TrafficLightAddGraphicalEventHandler(this);
 		this.menuItemAddGraphical.addActionListener(this.eventHandlerAddGraphical);
 				
 		// adding a new text window
 		this.menuItemAddText = new JMenuItem("Add a new text window", KeyEvent.VK_T);
 		this.menuItemAddText.getAccessibleContext().setAccessibleDescription("This adds a new text window");
-		this.menu.add(this.menuItemAddText);
+		this.submenuAddView.add(this.menuItemAddText);
 		this.eventHandlerAddText = new TrafficLightAddTextEventHandler(this);
 		this.menuItemAddText.addActionListener(this.eventHandlerAddText);
+		
+		// creating a sub menu dedicated to view removal
+		//TODO
 			
 		this.setJMenuBar(this.menuBar);
 		
@@ -121,6 +164,18 @@ public class TrafficLightMainView extends JFrame
 	public void setEventHandlerOnOff(TrafficLightOnOffEventHandler eventHandlerOnOff) {
 		this.eventHandlerOnOff = eventHandlerOnOff;
 	}
+	
+	
+	public TrafficLightChooseFrenchEventHandler getEventHandlerChooseFrench()
+	{
+		return this.eventHandlerChooseFrench;
+	}
+	
+	
+	public TrafficLightChooseGermanEventHandler getEventHandlerChooseGerman()
+	{
+		return this.eventHandlerChooseGerman;
+	}
 
 
 	public TrafficLightAdvanceCycleEventHandler getEventHandlerAdvanceCycle() {
@@ -130,6 +185,18 @@ public class TrafficLightMainView extends JFrame
 
 	public void setEventHandlerAdvanceCycle(TrafficLightAdvanceCycleEventHandler eventHandlerAdvanceCycle) {
 		this.eventHandlerAdvanceCycle = eventHandlerAdvanceCycle;
+	}
+	
+	
+	public void setEventHandlerChooseFrench(TrafficLightChooseFrenchEventHandler eventHandlerChooseFrench)
+	{
+		this.eventHandlerChooseFrench = eventHandlerChooseFrench;
+	}
+	
+	
+	public void setEventHandlerChooseGerman(TrafficLightChooseGermanEventHandler eventHandlerChooseGerman)
+	{
+		this.eventHandlerChooseGerman = eventHandlerChooseGerman;
 	}
 	
 	

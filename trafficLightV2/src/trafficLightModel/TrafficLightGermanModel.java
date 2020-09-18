@@ -85,6 +85,14 @@ public class TrafficLightGermanModel implements TrafficLightColorCycle
 	}
 	
 	
+	public void reset()
+	{
+		this.isRunning = false;
+		this.currentColor = TrafficLightColor.GREY;
+		this.nextColor = TrafficLightColor.RED;
+	}
+	
+	
 	///////////////////////////////////////////////////////////////////////////
 	
 	
