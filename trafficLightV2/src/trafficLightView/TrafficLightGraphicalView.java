@@ -8,6 +8,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import trafficLightController.TrafficLightRemoveGraphicalEventHandler;
+
 public class TrafficLightGraphicalView extends JInternalFrame
 {
 	
@@ -18,6 +20,7 @@ public class TrafficLightGraphicalView extends JInternalFrame
 	private JButton buttonAdvanceCycle;
 	private JLabel labelTrafficLightColor;
 	private int id;
+	private TrafficLightRemoveGraphicalEventHandler eventHandlerRemoveGraphical;
 	
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -50,6 +53,9 @@ public class TrafficLightGraphicalView extends JInternalFrame
 		
 		// adding the panel containing the 3 components as content of the current internal frame
 		this.setContentPane(jp);
+		
+		// creating the destruction event handler (will be binded to the parent JFrame)
+		this.eventHandlerRemoveGraphical = new TrafficLightRemoveGraphicalEventHandler(this);
 	}
 	
 
@@ -81,6 +87,12 @@ public class TrafficLightGraphicalView extends JInternalFrame
 	}
 	
 	
+	public TrafficLightRemoveGraphicalEventHandler getEventHandlerRemoveGraphical()
+	{
+		return this.eventHandlerRemoveGraphical;
+	}
+	
+	
 	public void setButtonOnOff(JButton buttonOnOff)
 	{
 		this.buttonOnOff = buttonOnOff;
@@ -102,6 +114,12 @@ public class TrafficLightGraphicalView extends JInternalFrame
 	public void setId(int id)
 	{
 		this.id = id;
+	}
+	
+	
+	public void setEventHandlerRemoveGraphical(TrafficLightRemoveGraphicalEventHandler eventHandlerRemoveGraphical)
+	{
+		this.eventHandlerRemoveGraphical = eventHandlerRemoveGraphical;
 	}
 	
 	

@@ -8,6 +8,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import trafficLightController.TrafficLightRemoveTextEventHandler;
+
 public class TrafficLightTextView extends JInternalFrame
 {
 	
@@ -18,6 +20,7 @@ public class TrafficLightTextView extends JInternalFrame
 	private JButton buttonAdvanceCycle;
 	private JLabel labelTrafficLightInstruction;
 	private int id;
+	private TrafficLightRemoveTextEventHandler eventHandlerRemoveText;
 	
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -48,6 +51,9 @@ public class TrafficLightTextView extends JInternalFrame
 		
 		// adding the panel containing the 3 components as content of the current internal frame
 		this.setContentPane(jp);
+		
+		// creating the destruction event handler (will be binded to the parent JFrame)
+		this.eventHandlerRemoveText = new TrafficLightRemoveTextEventHandler(this);
 	}
 	
 	
@@ -77,6 +83,12 @@ public class TrafficLightTextView extends JInternalFrame
 	{
 		return this.id;
 	}
+	
+	
+	public TrafficLightRemoveTextEventHandler getEventHandlerRemoveText()
+	{
+		return this.eventHandlerRemoveText;
+	}
 		
 		
 	public void setButtonOnOff(JButton buttonOnOff)
@@ -97,9 +109,15 @@ public class TrafficLightTextView extends JInternalFrame
 	}
 	
 	
-	private void setId(int id)
+	public void setId(int id)
 	{
 		this.id = id;
+	}
+	
+	
+	public void setEventHandlerRemoveText(TrafficLightRemoveTextEventHandler eventHandlerRemoveText)
+	{
+		this.eventHandlerRemoveText = eventHandlerRemoveText;
 	}
 	
 	
