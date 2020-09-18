@@ -24,13 +24,13 @@ public class TrafficLightTextView extends JInternalFrame
 	public TrafficLightTextView()
 	{
 		this.setTitle("Traffic light (text view)");
-		this.setSize(250,250);
+		this.setSize(250,100);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 		
 		// creating components (buttons and label)
 		this.buttonOnOff = new JButton("On/Off");
-		this.buttonAdvanceCycle = new JButton("Advance cycle");
+		this.buttonAdvanceCycle = new JButton("Advance");
 		this.labelTrafficLightInstruction = new JLabel("The traffic light is not running.");	// empty text
 		
 		// creating a panel and adding components to the panel

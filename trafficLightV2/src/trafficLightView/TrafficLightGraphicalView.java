@@ -24,13 +24,13 @@ public class TrafficLightGraphicalView extends JInternalFrame
 	public TrafficLightGraphicalView()
 	{
 		this.setTitle("Traffic light (graphical view)");
-		this.setSize(250,250);
+		this.setSize(250,100);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 		
 		// creating components (buttons and label)
 		this.buttonOnOff = new JButton("On/Off");
-		this.buttonAdvanceCycle = new JButton("Advance cycle");
+		this.buttonAdvanceCycle = new JButton("Advance");
 		this.labelTrafficLightColor = new JLabel("      ");	// empty text
 		this.labelTrafficLightColor.setOpaque(true);
 		this.labelTrafficLightColor.setBackground(Color.gray);

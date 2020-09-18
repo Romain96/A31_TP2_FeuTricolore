@@ -9,7 +9,7 @@ public class Main {
 		TrafficLight tl = new TrafficLight(new TrafficLightGermanModel());
 
 		// creating a main window
-		TrafficLightMainView mv = new TrafficLightMainView();
+		TrafficLightMainView mv = new TrafficLightMainView(1, 1);
 		
 		// adding the traffic light instance to all event handlers of the main window
 		mv.getEventHandlerOnOff().setTrafficLight(tl);
