@@ -1,5 +1,7 @@
 package trafficLightModel;
 
+import java.awt.Color;
+
 public class TrafficLight {
 	
 	// attributes
@@ -105,6 +107,23 @@ public class TrafficLight {
 		}
 		
 		return instruction;
+	}
+	
+	
+	// returns the color to display in the view (java.awt.color)
+	public Color getDisplayColor()
+	{
+		Color color = Color.gray;
+		
+		switch (this.color)
+		{
+		case GREEN: color = Color.green; break;
+		case ORANGE: color = Color.orange; break;
+		case RED: color = Color.red; break;
+		case GREY: color = Color.gray; break;
+		}
+		
+		return color;
 	}
 	
 	
