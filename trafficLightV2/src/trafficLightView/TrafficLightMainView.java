@@ -230,6 +230,18 @@ public class TrafficLightMainView extends JFrame
 	}
 	
 	
+	public TrafficLightAddGraphicalEventHandler getEventHandlerAddGraphgical()
+	{
+		return this.eventHandlerAddGraphical;
+	}
+	
+	
+	public TrafficLightAddTextEventHandler getEventHandlerAddText()
+	{
+		return this.eventHandlerAddText;
+	}
+	
+	
 	public TrafficLightChooseFrenchEventHandler getEventHandlerChooseFrench()
 	{
 		return this.eventHandlerChooseFrench;
@@ -261,6 +273,18 @@ public class TrafficLightMainView extends JFrame
 	public void setEventHandlerChooseGerman(TrafficLightChooseGermanEventHandler eventHandlerChooseGerman)
 	{
 		this.eventHandlerChooseGerman = eventHandlerChooseGerman;
+	}
+	
+	
+	public void setEventHandlerAddGraphival(TrafficLightAddGraphicalEventHandler eventHandlerAddGraphical)
+	{
+		this.eventHandlerAddGraphical = eventHandlerAddGraphical;
+	}
+	
+	
+	public void setEventHandlerAddText(TrafficLightAddTextEventHandler eventHandlerAddText)
+	{
+		this.eventHandlerAddText = eventHandlerAddText;
 	}
 	
 	

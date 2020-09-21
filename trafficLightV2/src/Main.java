@@ -16,5 +16,9 @@ public class Main {
 		mv.getEventHandlerAdvanceCycle().setTrafficLight(tl);
 		mv.getEventHandlerChooseFrench().setTrafficLight(tl);
 		mv.getEventHandlerChooseGerman().setTrafficLight(tl);
+		
+		// same for adding views
+		mv.getEventHandlerAddGraphgical().setTrafficLight(tl);
+		mv.getEventHandlerAddText().setTrafficLight(tl);
 	}
 }
