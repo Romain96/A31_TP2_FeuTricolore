@@ -21,4 +21,5 @@ public class Main {
 		mv.getEventHandlerAddGraphgical().setTrafficLight(tl);
 		mv.getEventHandlerAddText().setTrafficLight(tl);
 	}
+	
 }
